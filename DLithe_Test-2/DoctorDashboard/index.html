@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+.request {
+    opacity: 1; 
+    transition: opacity 0.5s ease-out; 
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-header{
+    font-size: 40px;
+    justify-content: center;
+    text-align: center;
+    padding: 5px 0px;
+    text-decoration: underline;
+    font-family: 'croissant One', sans-serif;
+}
+.header{
+    font-size: 30px;
+    justify-content: center;
+    text-align: center;
+    padding: 25px 0px;
+    font-family: 'croissant One', sans-serif;
+}
+.sub-header{
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 5px ;
+    font-family: 'croissant One', sans-serif;
+}
+
+
+.request {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 20px; 
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.request-details {
+    flex-grow: 1;
+    font-size: 18px;
+    font-family: 'Quicksand', sans-serif;
+}
+.request-details h2:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.subtext {
+    font-size: 14px; 
+    color: #777; 
+}
+
+.request-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.accept-button, .reject-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: 3px solid black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.accept-button:hover {
+    background-color: #009726;
+}
+
+.reject-button:hover {
+    background-color: #dc3545; 
+}
+
+/* footer */
+footer {
+    position: relative;
+    top: 800px;
+    background: black;
+    color: grey;
+    padding: 22px 10px;
+    margin-top:50px;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+    </style>
+    <script>
+        function acceptRequest(requestId) {
+    var request = document.getElementById(requestId);
+    if (request) {
+        request.style.backgroundColor = "rgb(0 255 0 / 52%)";
+
+
+
+        var textElements = request.querySelectorAll('*');
+        if (textElements) {
+            textElements.forEach(function (textElement) {
+                textElement.style.color = "black";
+            });
+        }
+    }
+}
+
+function rejectRequest(requestId) {
+    var request = document.getElementById(requestId);
+    if (request) {
+        request.style.transition = "opacity 0.5s ease-out"; 
+        request.style.opacity = "0"; 
+        setTimeout(function () {
+            request.style.display = "none"; 
+        }, 500); 
+    }
+}
+    </script>
+    <title>Request Dashboard | For Doctors</title>
+</head>
+<link
+    href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Denk+One&family=Quicksand:wght@300;600&family=Teko:wght@300&display=swap"
+    rel="stylesheet">
+
+<body>
+    <h1 style="text-align: center;">Pending Requests | For Doctors</h1>
+    <div class="request" id="request1">
+        <div class="request-details">
+            <h2>Ranjith</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 19/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request1')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request1')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request2">
+        <div class="request-details">
+            <h2>Mayur</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 2/8/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request2')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request2')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request3">
+        <div class="request-details">
+            <h2>Sandesh</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 29/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request3')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request3')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request4">
+        <div class="request-details">
+            <h2>Sowmya S</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 14/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request4')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request4')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request5">
+        <div class="request-details">
+            <h2>Manohar P</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 9/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request5')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request5')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request6">
+        <div class="request-details">
+            <h2>Rajesh Suvarna</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 30/8/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request6')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request6')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request7">
+        <div class="request-details">
+            <h2>Deekshith</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 5/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request7')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request7')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request8">
+        <div class="request-details">
+            <h2>Sanmith D</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 7/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request8')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request8')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request9">
+        <div class="request-details">
+            <h2>Karthik S</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 1/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request9')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request9')">Reject&nbsp</button>
+        </div>
+    </div>
+    <div class="request" id="request10">
+        <div class="request-details">
+            <h2>Tanush M</h2>
+            <p id="case-number">CNR : 1234567890123456</p>
+            <p id="request-date">Request Date: 12/9/2023</p>
+        </div>
+        <div class="request-actions">
+            <button class="accept-button" onclick="acceptRequest('request10')">Accept</button>
+            <button class="reject-button" onclick="rejectRequest('request10')">Reject&nbsp</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="center">
+            Copyright &copy; www.electronichealthrecord.com | All rights reserved
+        </div>
+    </footer>
+
+</body>
+
+</html>

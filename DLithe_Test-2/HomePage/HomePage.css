@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.card{
+    cursor: pointer;
+}
+.card:hover{
+    box-shadow: 1px 1px 10px black;
+}
+.col-md-6{
+    cursor: pointer;
+}
+.col-md-6 img:hover{
+     box-shadow: 1px 1px 10px black;
+}

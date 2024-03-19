@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Verify.css">
+    <script src="./Verify.js"></script>
+    <title>Email Verification</title>
+</head>
+<body>
+    <div id="verification-form">
+        <h2>Email Verification</h2>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <button id="send-code-btn" onclick="sendCode()">Send Code</button>
+        <input type="text" id="verification-code" placeholder="Verification Code" required>
+        <button id="verify-btn" onclick="verifyCode()">Verify</button>
+        <p id="error-message"></p>
+        <div id="timer"></div>
+    </div>
+</body>
+</html>

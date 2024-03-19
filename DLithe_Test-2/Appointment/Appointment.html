@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment Booking</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  #appointmentForm {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  input, button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid grey;
+  }
+
+  input[type="date"],
+  input[type="time"] {
+    width: calc(50% - 10px);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+  }
+
+  button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #3498db;
+    color: white;
+  }
+  .InnerBtn1{
+    background-color: #145A32;
+    color: white;
+    font-weight: bold;
+  }
+  .InnerBtn1:hover{
+    background-color: #186A3B;
+  }
+
+  .InnerBtn2{
+    background-color: #B71C1C;
+    color: white;
+    font-weight: bold;
+  }
+  .InnerBtn2:hover{
+    background-color: #C62828;
+  }
+</style>
+</head>
+<body>
+  <h1>Book Appointment</h1>
+  <form id="appointmentForm">
+    <input type="date" id="appDate" required>
+    <input type="time" id="appTime" required>
+    <input type="text" id="patientName" placeholder="Patient Name" required>
+    <input type="email" id="patientEmail" placeholder="Patient Email Address" required>
+    <input type="tel" id="patientPhoneno" placeholder="Patient Phone Number" required>
+    <button type="submit">Add Appointment</button>
+  </form>
+  <div class="container">
+    <table id="appointmentsTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Patient Name</th>
+          <th>Email Address</th>
+          <th>Phone Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <script>
+    const appointmentsTable = document.getElementById('appointmentsTable');
+    const appointmentForm = document.getElementById('appointmentForm');
+
+  appointmentForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const date = document.getElementById('appDate').value;
+  const time = document.getElementById('appTime').value;
+  const patientName = document.getElementById('patientName').value;
+  const patientEmail = document.getElementById('patientEmail').value;
+  const patientPhoneno = document.getElementById('patientPhoneno').value;
+  
+  const newRow = appointmentsTable.insertRow(-1);
+  const cell1 = newRow.insertCell(0);
+  const cell2 = newRow.insertCell(1);
+  const cell3 = newRow.insertCell(2);
+  const cell4 = newRow.insertCell(3);
+  const cell5 = newRow.insertCell(4);
+  const cell6 = newRow.insertCell(5);
+  
+  cell1.textContent = date;
+  cell2.textContent = time;
+  cell3.textContent = patientName;
+  cell4.textContent = patientEmail;
+  cell5.textContent = patientPhoneno;
+  cell6.innerHTML = '<button class="InnerBtn1" onclick="editRow(this)">Edit</button> <button class="InnerBtn2" onclick="deleteRow(this)">Delete</button>';
+  
+  appointmentForm.reset();
+});
+
+function editRow(row) {
+  const selectedRow = row.parentNode.parentNode;
+  const cells = selectedRow.getElementsByTagName('td');
+  document.getElementById('appDate').value = cells[0].textContent;
+  document.getElementById('appTime').value = cells[1].textContent;
+  document.getElementById('patientName').value = cells[2].textContent;
+  document.getElementById('patientEmail').value = cells[3].textContent;
+  document.getElementById('patientPhoneno').value = cells[4].textContent;
+  selectedRow.remove();
+}
+
+function deleteRow(row) {
+  row.parentNode.parentNode.remove();
+}
+</script>
+</body>
+</html>
