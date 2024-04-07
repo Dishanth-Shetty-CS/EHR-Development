@@ -46,7 +46,7 @@ try {
      String queryRecordsSQL = "SELECT * FROM query_records";
      
      rs = st.executeQuery(queryRecordsSQL);     
-     rs.next();
+     
      //-------------------------------------
 %>
 
@@ -69,12 +69,12 @@ try {
 <div class="dashboard-bottom-container">
     <h3>Query List</h3>
 	
-	<div id="container-tabs">
-		<p id="unread-messages">Unread Queries</p>
-		<p id="read-messages">Read Queries</p>
+	<div class="container-tabs">
+		<p class="container-tabs-options" id="active-container-tabs" onclick="loadUnreadQueries()">Unread Queries</p>
+		<p class="container-tabs-options" onclick="loadReadQueries()">Read Queries</p>
 		
-		<div style="display: flex; flex-direction: row; justify-content: right; flex-grow: 1;">
-		    <h3 style="margin: 0; padding: 10px; padding-right: 20px">Number of queries: <%= totalQueries %></h3>	
+		<div id="query-count-container">
+		    <h3 id="query-count">Number of queries: <%= totalQueries %></h3>	
 		</div>
 	</div>
 
@@ -84,8 +84,9 @@ try {
 			<div class="query-columns">
 				<p class="query-head">Date</p>
 				<div class="query-body">
-					<%						
-						for (int i = 1; i <= totalQueries; i++) {							
+					<%
+						for (int i = 1; i <= totalQueries; i++) {
+							rs.next();
 							%>					
 								<p><%= rs.getString(7) %></p>
 							<%
@@ -98,9 +99,46 @@ try {
 				<p class="query-head">Name</p>
 				<div class="query-body">
 					<%
+						rs = st.executeQuery(queryRecordsSQL);
 						for (int i = 1; i <= totalQueries; i++) {
+							rs.next();
 							%>					
 								<p><%= rs.getString(3) %></p>
+							<%
+						}
+					%>		
+				</div>
+			</div>
+
+			<div class="query-columns">
+				<p class="query-head">Subject</p>
+				<div class="query-body">
+					<%
+						rs = st.executeQuery(queryRecordsSQL);
+						for (int i = 1; i <= totalQueries; i++) {
+							rs.next();
+							%>					
+								<p><%= rs.getString(4) %></p>
+							<%
+						}
+					%>
+				</div>
+			</div>
+
+			<div class="query-columns">
+				<p class="query-head">View Message</p>
+				<div class="query-body">
+					<%
+						rs = st.executeQuery(queryRecordsSQL);
+						for (int i = 1; i <= totalQueries; i++) {
+							rs.next();
+							%>													
+								<i class="fa-solid fa-envelope" onclick="showMessage(this)"></i>								
+			
+					 			<div class="message" id="<%= rs.getString(1) %>">
+									<i class="fa-solid fa-square-xmark" onclick="closeMessage(this)"></i>
+									<p><%= rs.getString(5) %></p>
+								</div>
 							<%
 						}
 					%>					
@@ -108,33 +146,12 @@ try {
 			</div>
 
 			<div class="query-columns">
-				<p class="query-head">Subject</p>
-				<div class="query-body">
-					<p>Testing</p>
-				</div>
-			</div>
-
-			<div class="query-columns">
-				<p class="query-head">View Message</p>
-				<div class="query-body">
-					<p>
-						<i class="fa-solid fa-envelope"></i>
-					</p>
-
-					<div class="message">
-						<i class="fa-solid fa-square-xmark"></i>
-						<p></p>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="query-columns">
 				<p class="query-head">Email Address</p>
 				<div class="query-body">
 					<%
+						rs = st.executeQuery(queryRecordsSQL);
 						for (int i = 1; i <= totalQueries; i++) {
-							
+							rs.next();
 							%>					
 								<p><%= rs.getString(2) %></p>
 							<%
@@ -146,11 +163,11 @@ try {
 		</div>
 	</div>
 </div>
-
+    
+    
 <%
      con.close();
 } catch(Exception e) {            
      e.printStackTrace();
 } 
 %>
-
