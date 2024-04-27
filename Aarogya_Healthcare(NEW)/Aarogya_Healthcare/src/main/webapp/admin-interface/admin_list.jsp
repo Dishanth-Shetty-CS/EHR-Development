@@ -11,6 +11,7 @@ int totalAdmins = 0;
 
 String opname = request.getParameter("opname");
 String email_address = request.getParameter("email_address");
+String email_address_filter = request.getParameter("email_address_filter");
  
 try {
 	 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -27,7 +28,7 @@ try {
      
      if (opname.equals("search-filter")) {
     	 //Gets the count of the total registered admins
-	     rs = st.executeQuery("SELECT COUNT(*) FROM registered_admins WHERE email_address LIKE \"" + email_address + "%\"");     
+	     rs = st.executeQuery("SELECT COUNT(*) FROM registered_admins WHERE email_address LIKE \"" + email_address_filter + "%\"");     
 	     rs.next();
 	     totalAdmins = rs.getInt(1); 
      } else {
@@ -83,7 +84,7 @@ try {
 			 
 		if (opname.equals("search-filter")) {
 			//Gets the Admin List
-		    String getAdminList = "SELECT * FROM registered_admins WHERE email_address LIKE \"" + email_address + "%\"";
+		    String getAdminList = "SELECT * FROM registered_admins WHERE email_address LIKE \"" + email_address_filter + "%\"";
 		    rs = st.executeQuery(getAdminList);		    		   
 		} else {
 			//Gets the Admin List

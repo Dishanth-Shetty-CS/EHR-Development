@@ -204,7 +204,7 @@ function loadAdminList() {
 	search_filter.addEventListener("keyup", function(event) {
 		if (event.key.length > 0) {						
 			
-			fetch('admin_list.jsp?opname=search-filter&email_address=' + event.target.value)
+			fetch('admin_list.jsp?opname=search-filter&email_address_filter=' + event.target.value + '&email_address=' + sessionStorage.getItem('registered_admins_email_address'))
 			.then(response => response.text())
 			.then(data => {
 				right_body.innerHTML = data;			
