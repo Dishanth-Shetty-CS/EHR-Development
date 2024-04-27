@@ -37,6 +37,9 @@ if (email_address != null) {
 
 			     session = request.getSession();
 				 session.setAttribute("department", department);
+			 } else if (user_table.equals("registered_users")) {		
+			     session = request.getSession();
+				 session.setAttribute("registerd_user_email_address", email_address);
 			 }
 			 
 			 response.setContentType("text/plain"); 

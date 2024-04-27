@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doctor Interface</title>
+<title>Patient Interface</title>
 <link rel="stylesheet" href="../admin-interface/admin_interface.css">
-<link rel="stylesheet" href="doctor_interface.css">
+<link rel="stylesheet" href="user_interface.css">
 <link rel="icon" href="../images/favicon.png" type="image/x-icon">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -20,16 +20,8 @@
 		<a href="../index.jsp" id="logo" target="_blank"> Aarogya Healthcare </a>
 
 		<nav>					
-			<div class="search-filter">			
-				<textarea id="search-filter-refill" placeholder="Enter Prescription ID..."></textarea>									
-			</div>
-				
-			<div class="search-filter">			
-				<textarea id="search-filter" placeholder="Search Email Address..."></textarea>									
-			</div>	
-		
 			<div class="logout-container"
-				onclick="window.location.replace('../logins/doctor_login.html')">				
+				onclick="window.location.replace('../logins/patient_login.html')">				
 				<i class="fa-solid fa-right-from-bracket"></i>
 				<button>Logout</button>
 			</div>
@@ -38,37 +30,32 @@
   
 	<main id="main">
 		<div id="sidebar">
-			
+
 			<div class="sidebar-options" onclick="loadDashboard()">
 				<i class="fa-solid fa-house-chimney"></i>
 				<p>Dashboard</p>
 			</div>
-			
-			<div class="sidebar-options" onclick="loadScheduledAppt()">
-				<i class="fa-solid fa-calendar-check"></i>
-				<p>Scheduled Appt.</p>
+
+			<div class="sidebar-options" onclick="loadBookAppt()">
+				<i class="fa-solid fa-book-medical"></i> 
+				<p>Book Appointment</p>
 			</div>
-	
-			<div class="sidebar-options" onclick="loadNewAppointments()">
+			
+			<div class="sidebar-options" onclick="loadMyAppointments()">
 				<i class="fa-solid fa-calendar-check"></i>
-				<p>New Appointments</p>
+				<p>My Appointments</p>
 			</div>
 			
 			<div class="sidebar-options" onclick="loadPrescription()">
 				<i class="fa-solid fa-prescription"></i>
-				<p>Prescription</p>
-			</div>			
-			
-			<div class="sidebar-options" onclick="loadUpdateRefill()">
-				<i class="fa-solid fa-pen-to-square"></i>
-				<p>Update Refill</p>
-			</div>			
-			
-			<div class="sidebar-options" onclick="loadPatientList()">
-				<i class="fa-solid fa-user"></i>
-				<p>Patient List</p>
+				<p>Prescriptions</p>
 			</div>
 			
+			<div class="sidebar-options" onclick="loadPrescriptionHistory()">
+				<i class="fa-solid fa-clock-rotate-left"></i>
+				<p>Prescription History</p>
+			</div>
+
 			<div class="sidebar-options" onclick="loadApptHistory()">
 				<i class="fa-solid fa-clock-rotate-left"></i>
 				<p>Appt. History</p>
@@ -79,7 +66,7 @@
 		<div id="right-body"></div>
 	</main>
 
-	<script src="doctor_interface.js" defer></script>   
+	<script src="user_interface.js" defer></script>   
    
 </body>
 </html>

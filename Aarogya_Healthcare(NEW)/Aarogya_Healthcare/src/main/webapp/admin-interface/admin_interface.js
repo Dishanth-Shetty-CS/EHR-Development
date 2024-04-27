@@ -215,7 +215,7 @@ function loadAdminList() {
 		}
 	});	
 		
-	fetch('admin_list.jsp?opname=admin-list')
+	fetch('admin_list.jsp?opname=admin-list&email_address=' + sessionStorage.getItem('registered_admins_email_address'))
 	.then(response => response.text())
 	.then(data => {
 		right_body.innerHTML = data;			

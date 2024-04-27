@@ -104,7 +104,7 @@ try {
 				<td><%= rs.getString(1) %></td>
 				<td style="text-align: center"><%= rs.getString(6) %></td>
 				<%
-					if (rs.getString(6).equals("Super Admin")) {
+					if (rs.getString(6).equals("Super Admin") || rs.getString(1).equals(email_address)) {
 						%>
 						<td style="text-align: center"><button class="null-button">NULL</button></td>
 						<%

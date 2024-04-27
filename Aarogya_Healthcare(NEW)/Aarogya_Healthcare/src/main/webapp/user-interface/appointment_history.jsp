@@ -9,8 +9,7 @@ ResultSet rs = null;
 
 int totalAppointmentsHistory = 0; 
 
-session = request.getSession();
-String dept = (String) session.getAttribute("department");
+String registered_users_email_address = request.getParameter("registered_users_email_address");
 
 try {
 	 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,7 +18,7 @@ try {
      st = con.createStatement();
      
    	 //Gets the count of the Appointments    
-     String getTotalAppointmentsHistory = "SELECT COUNT(*) FROM appointment_records WHERE appointment_type = \"" + dept + "\" AND appointment_status = \"Visited\" OR appointment_type = \"" + dept + "\" AND appointment_status = \"Cancelled\" OR appointment_type = \"" + dept + "\" AND appointment_status = \"Not Visited\"";
+     String getTotalAppointmentsHistory = "SELECT COUNT(*) FROM appointment_records WHERE registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Visited\" OR registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Cancelled\" OR registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Not Visited\"";
     
      rs = st.executeQuery(getTotalAppointmentsHistory);
      rs.next();
@@ -41,13 +40,13 @@ try {
 			<th>Date</th>				
 			<th>Time 24h</th>				
 			<th>Type</th>				
-			<th>Status</th>				
+			<th>Status</th>																					
 			<th>Patient Email</th>				
 			<th>Doctor Email</th>				
 		</tr>
 		
 		<%
-		String newAppointments = "SELECT * FROM appointment_records WHERE appointment_type = \"" + dept + "\" AND appointment_status = \"Visited\" OR appointment_type = \"" + dept + "\" AND appointment_status = \"Cancelled\" OR appointment_type = \"" + dept + "\" AND appointment_status = \"Not Visited\" ORDER BY appointment_id DESC";
+		String newAppointments = "SELECT * FROM appointment_records WHERE registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Visited\" OR registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Cancelled\" OR registered_users_email_address = \"" + registered_users_email_address + "\" AND appointment_status = \"Not Visited\" ORDER BY appointment_id DESC";
 		rs = st.executeQuery(newAppointments);
 		
 		for (int i = 1; i <= totalAppointmentsHistory; i++) {		
@@ -74,8 +73,8 @@ try {
 						<%
 					}
 			
-				%>
-				<td><%= rs.getString(6) %></td>									
+				%>																							
+				<td><%= rs.getString(6) %></td>																								
 				<td><%= rs.getString(7) %></td>								
 			</tr>
 			<%

@@ -19,6 +19,7 @@ let sidebar_options = document.getElementsByClassName("sidebar-options");
 
 function loadDashboard() {
 	document.getElementById("search-filter").style.display = "none";	
+	document.getElementById("search-filter-refill").style.display = "none";	
 	
 	for (let i = 0; i < sidebar_options.length; i++) {
 		sidebar_options[i].classList.remove("active-sidebar-options");			
@@ -26,7 +27,7 @@ function loadDashboard() {
 		
 	sidebar_options[0].classList.add("active-sidebar-options");
 		
-	fetch('doctorDashboard.jsp?opname=appointments&dept=' + sessionStorage.getItem("department"))
+	fetch('doctorDashboard.jsp?opname=appointments')
 		.then(response => response.text())
 		.then(data => {
 			right_body.innerHTML = data;			
@@ -62,14 +63,61 @@ function visitedUpdate(id, button_type) {
 
 
 
-function loadNewAppointments() {
+function loadScheduledAppt() {
 	document.getElementById("search-filter").style.display = "none";	
+	document.getElementById("search-filter-refill").style.display = "none";	
 	
 	for (let i = 0; i < sidebar_options.length; i++) {
 		sidebar_options[i].classList.remove("active-sidebar-options");			
 	}
 		
 	sidebar_options[1].classList.add("active-sidebar-options");
+	
+	fetch('scheduled_appointment.jsp?opname=appointments')
+		.then(response => response.text())
+		.then(data => {
+			right_body.innerHTML = data;			
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});	
+}
+
+
+function loadApptFilterDashboard2(id) {
+	fetch('scheduled_appointment.jsp?opname=update&apptId=' + id)
+		.then(response => response.text())
+		.then(data => {
+			right_body.innerHTML = data;			
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});			
+}
+
+
+function visitedUpdate2(id, button_type) {
+	fetch('scheduled_appointment.jsp?opname=update&apptId=' + id + '&button_type=' + button_type)
+		.then(response => response.text())
+		.then(data => {
+			right_body.innerHTML = data;			
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});			
+}
+
+
+
+function loadNewAppointments() {
+	document.getElementById("search-filter").style.display = "none";	
+	document.getElementById("search-filter-refill").style.display = "none";	
+	
+	for (let i = 0; i < sidebar_options.length; i++) {
+		sidebar_options[i].classList.remove("active-sidebar-options");			
+	}
+		
+	sidebar_options[2].classList.add("active-sidebar-options");
 	
 	fetch('new_Appointments.jsp?opname=appointments')
 		.then(response => response.text())
@@ -97,12 +145,13 @@ function loadNewApptFilter(id, action) {
 
 function loadPrescription() {
 	document.getElementById("search-filter").style.display = "none";	
+	document.getElementById("search-filter-refill").style.display = "none";	
 	
 	for (let i = 0; i < sidebar_options.length; i++) {
 		sidebar_options[i].classList.remove("active-sidebar-options");			
 	}
 		
-	sidebar_options[2].classList.add("active-sidebar-options");
+	sidebar_options[3].classList.add("active-sidebar-options");
 		
 	fetch('prescription.jsp?opname=prescription')
 		.then(response => response.text())
@@ -116,35 +165,68 @@ function loadPrescription() {
 
 
 
-function loadApptHistory() {
+function loadUpdateRefill() {
 	document.getElementById("search-filter").style.display = "none";	
-	
-	for (let i = 0; i < sidebar_options.length; i++) {
-		sidebar_options[i].classList.remove("active-sidebar-options");			
-	}
-		
-	sidebar_options[3].classList.add("active-sidebar-options");
-	
-	fetch('appointment_history.jsp')
-		.then(response => response.text())
-		.then(data => {
-			right_body.innerHTML = data;			
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});	
-}
-
-
-
-function loadPatientList() {	
-	document.getElementById("search-filter").style.display = "block";	
+	document.getElementById("search-filter-refill").style.display = "block";	
 	
 	for (let i = 0; i < sidebar_options.length; i++) {
 		sidebar_options[i].classList.remove("active-sidebar-options");			
 	}
 	
 	sidebar_options[4].classList.add("active-sidebar-options");	
+	
+	let search_filter_refill = document.getElementById("search-filter-refill");
+	
+	search_filter_refill.addEventListener("keyup", function(event) {
+		if (event.key.length > 0) {						
+			
+			sessionStorage.setItem("prescription_id_filter", event.target.value.trim());
+			
+			fetch('update_refill.jsp?prescription_id_filter=' + event.target.value)
+			.then(response => response.text())
+			.then(data => {
+				right_body.innerHTML = data;			
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});	
+		}
+	});	
+		
+	fetch('update_refill.jsp')
+	.then(response => response.text())
+	.then(data => {
+		right_body.innerHTML = data;			
+	})
+	.catch(error => {
+		console.error('Error:', error);
+	});	
+}
+
+
+function loadPrescriptionFilter(id) {
+	fetch('update_refill.jsp?prescription_id=' + id + "&prescription_id_filter=" + sessionStorage.getItem("prescription_id_filter"))
+		.then(response => response.text())
+		.then(data => {
+			window.alert("Decremented By 1 Successfully");
+			right_body.innerHTML = data;					
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});		
+}
+
+
+
+function loadPatientList() {	
+	document.getElementById("search-filter").style.display = "block";	
+	document.getElementById("search-filter-refill").style.display = "none";	
+	
+	for (let i = 0; i < sidebar_options.length; i++) {
+		sidebar_options[i].classList.remove("active-sidebar-options");			
+	}
+	
+	sidebar_options[5].classList.add("active-sidebar-options");	
 	
 	let search_filter = document.getElementById("search-filter");
 	
@@ -190,4 +272,28 @@ function submitPrescriptionForm(event) {
 	
 	return false;
 }
+
+
+
+function loadApptHistory() {
+	document.getElementById("search-filter").style.display = "none";	
+	document.getElementById("search-filter-refill").style.display = "none";	
+	
+	for (let i = 0; i < sidebar_options.length; i++) {
+		sidebar_options[i].classList.remove("active-sidebar-options");			
+	}
+		
+	sidebar_options[6].classList.add("active-sidebar-options");
+	
+	fetch('appointment_history.jsp')
+		.then(response => response.text())
+		.then(data => {
+			right_body.innerHTML = data;			
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});	
+}
+
+
 
